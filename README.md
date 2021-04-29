@@ -1,7 +1,5 @@
 [![CI](https://github.com/holisticon/secure-delete-article/actions/workflows/build.yml/badge.svg)](https://github.com/holisticon/secure-delete-article/actions/workflows/build.yml)
-[![Known Vulnerabilities](https://snyk.io/test/github/holisticon/secure-delete-article/badge.svg?targetFile=pom.xml)](https://snyk.io/test/github/holisticon/reference-arch?targetFile=pom.xml)
-[![codecov](https://codecov.io/gh/holisticon/secure-delete-article/branch/master/graph/badge.svg)](https://codecov.io/gh/holisticon/reference-arch)
-[![sonarcube](https://sonarcloud.io/api/project_badges/measure?project=de.holisticon.reference-arch%3Areference-arch-parent&metric=alert_status)](https://sonarcloud.io/dashboard?id=de.holisticon.reference-arch%3Areference-arch-parent)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=de.holisticon.demos%3Asecure-delete-sample&metric=alert_status)](https://sonarcloud.io/dashboard?id=de.holisticon.demos%3Asecure-delete-sample)
 
 - [Reference Architecture](#reference-architecture)
   - [Setup](#setup)

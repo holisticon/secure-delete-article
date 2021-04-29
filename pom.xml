@@ -3,8 +3,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>de.holisticon.reference-arch</groupId>
-  <artifactId>reference-arch-parent</artifactId>
+  <groupId>de.holisticon.demos</groupId>
+  <artifactId>secure-delete-sample</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
@@ -34,22 +34,22 @@
     <dependencies>
       <!-- Project -->
       <dependency>
-        <groupId>de.holisticon.reference-arch</groupId>
+        <groupId>de.holisticon.demos</groupId>
         <artifactId>frontend</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <groupId>de.holisticon.reference-arch</groupId>
+        <groupId>de.holisticon.demos</groupId>
         <artifactId>backend</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <groupId>de.holisticon.reference-arch</groupId>
+        <groupId>de.holisticon.demos</groupId>
         <artifactId>backend-rest</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <groupId>de.holisticon.reference-arch</groupId>
+        <groupId>de.holisticon.demos</groupId>
         <artifactId>api</artifactId>
         <version>${project.version}</version>
       </dependency>
