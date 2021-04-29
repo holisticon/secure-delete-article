@@ -8,12 +8,17 @@
   - [Demo Data](#demo-data)
     - [Keycloak Users](#keycloak-users)
   - [Development](#development)
-  
+
 # Reference Architecture
 
 > Reference stack demonstrating the build and application composition with Keycloak, SpringBoot, Kotlin, Swagger, Angular and TypeScript.
 
 ## Setup
+
+Prerequisites:
+* JDK 11+
+* Docker
+* NodeJS 12+
 
 Start the docker stack:
 
