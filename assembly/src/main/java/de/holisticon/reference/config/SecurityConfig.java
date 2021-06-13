@@ -1,8 +1,5 @@
 package de.holisticon.reference.config;
 
-import java.util.Arrays;
-import java.util.Collections;
-
 import org.keycloak.adapters.KeycloakConfigResolver;
 import org.keycloak.adapters.springboot.KeycloakSpringBootConfigResolver;
 import org.keycloak.adapters.springsecurity.KeycloakConfiguration;
@@ -31,6 +28,9 @@ import org.springframework.security.web.authentication.session.SessionAuthentica
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
+import java.util.Collections;
 
 @KeycloakConfiguration
 @Profile("!test")
@@ -112,8 +112,8 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
             .sessionAuthenticationStrategy(sessionAuthenticationStrategy())
             .and()
             .authorizeRequests()
-            .antMatchers("/**")
-            .authenticated()
+//            .antMatchers("/**")
+//            .authenticated()
             .anyRequest()
             .permitAll();
     // @formatter:on
