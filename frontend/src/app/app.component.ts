@@ -12,6 +12,8 @@ export class AppComponent implements OnInit {
   public isLoggedIn = false;
   public userProfile: KeycloakProfile | null = null;
 
+  apps: Array<any>;
+
   constructor(
     private readonly keycloak: KeycloakService,
     private logger: NGXLogger
