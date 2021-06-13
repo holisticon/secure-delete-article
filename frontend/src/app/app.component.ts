@@ -1,8 +1,7 @@
-import { Component, OnInit } from "@angular/core";
-import { KeycloakService } from "keycloak-angular";
-import { KeycloakProfile } from "keycloak-js";
-import { NGXLogger } from "ngx-logger";
-import { Application, ApplicationService } from "../../src-gen";
+import {Component, OnInit} from "@angular/core";
+import {KeycloakService} from "keycloak-angular";
+import {KeycloakProfile} from "keycloak-js";
+import {NGXLogger} from "ngx-logger";
 
 @Component({
   selector: "app-root",
@@ -13,19 +12,12 @@ export class AppComponent implements OnInit {
   public isLoggedIn = false;
   public userProfile: KeycloakProfile | null = null;
 
-  apps: Array<Application>;
-
   constructor(
     private readonly keycloak: KeycloakService,
-    private serviceClient: ApplicationService,
     private logger: NGXLogger
   ) {}
-  
+
   printApplications(): void {
-    this.serviceClient.getApplications("test").subscribe((apps) => {
-      this.apps = apps;
-      apps.forEach((app) => this.logger.debug("Application:", app.name));
-    });
   }
 
   public async ngOnInit() {

@@ -27,14 +27,6 @@
     </h2>
   </li>
   <li *ngIf="isLoggedIn">
-    <p-button label="Print Applications" (onClick)="printApplications()">
-    </p-button>
-    <div>
-      <span *ngFor="let app of apps">
-        {{ app.name }} ({{ app.applicationId }})
-      </span>
-      <p *ngIf="!apps || apps.length === 0">No Applications found...</p>
-    </div>
   </li>
   <li>
     <p-button label="Login" (onClick)="login()" *ngIf="!isLoggedIn"></p-button>
