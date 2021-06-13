@@ -8,7 +8,7 @@ import javax.persistence.Id
 import javax.persistence.Table
 
 @Entity
-@Table(name = "user")
+@Table(name = "todo")
 data class ToDoItem(
     @Id
     var id: Long? = null,
