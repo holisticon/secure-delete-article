@@ -5,17 +5,17 @@ import org.mapstruct.InheritInverseConfiguration
 import org.mapstruct.Mapper
 import org.mapstruct.Mapping
 import org.mapstruct.Mappings
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.Table
+import javax.persistence.*
 
 @Entity
 @Table(name = "user")
 data class User(
     @Id
     var id: Long? = null,
-    var name: String) {
-  constructor() : this(null, "")
+    var name: String,
+    @OneToMany(fetch = FetchType.LAZY)
+    var toDoItems: List<ToDoItem>) {
+  constructor() : this(null, "", emptyList())
 }
 
 @Mapper(componentModel = "spring")

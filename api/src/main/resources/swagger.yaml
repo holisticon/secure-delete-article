@@ -95,6 +95,40 @@ paths:
           schema:
             title: A users To-Do List
             type: array
+            items:
+              $ref: '#/definitions/ToDoItem'
+        '400':
+          description: Bad Request - Invalid parameter value.
+        '401':
+          description: Unauthorized - No user credentials where provided.
+        '404':
+          description: Not Found - No result has been found matching the request criteria.
+    post:
+      tags:
+        - todo
+      summary: Create a new entry in the list
+      description: ''
+      operationId: addEntry
+      produces:
+        - application/json
+      parameters:
+        - name: userId
+          in: path
+          description: technical ID of the user
+          required: true
+          type: string
+        - name: toDoItem
+          in: body
+          required: true
+          schema:
+            type: object
+            $ref: '#/definitions/ToDoItem'
+      responses:
+        '200':
+          description: Successful operation.
+          schema:
+            title: A users To-Do List
+            type: object
             $ref: '#/definitions/ToDoItem'
         '400':
           description: Bad Request - Invalid parameter value.
