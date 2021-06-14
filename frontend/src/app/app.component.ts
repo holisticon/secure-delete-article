@@ -2,6 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {KeycloakService} from "keycloak-angular";
 import {KeycloakProfile} from "keycloak-js";
 import {NGXLogger} from "ngx-logger";
+import {User, UserService} from "../../src-gen";
 
 @Component({
   selector: "app-root",
@@ -12,14 +13,22 @@ export class AppComponent implements OnInit {
   public isLoggedIn = false;
   public userProfile: KeycloakProfile | null = null;
 
-  apps: Array<any>;
+  user: User;
 
   constructor(
     private readonly keycloak: KeycloakService,
-    private logger: NGXLogger
+    private logger: NGXLogger,
+    private userService: UserService
   ) {}
 
   printApplications(): void {
+
+    this.userService.createUser('12345', {
+      userId: '12345',
+      name: 'hans.wurst',
+    }).subscribe(user => {
+      this.user = user;
+    });
   }
 
   public async ngOnInit() {
@@ -27,6 +36,7 @@ export class AppComponent implements OnInit {
 
     if (this.isLoggedIn) {
       this.userProfile = await this.keycloak.loadUserProfile();
+      this.printApplications();
     }
   }
 

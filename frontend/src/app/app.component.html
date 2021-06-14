@@ -27,6 +27,7 @@
     </h2>
   </li>
   <li *ngIf="isLoggedIn">
+    <p>Create user: {{user?.name}}</p>
   </li>
   <li>
     <p-button label="Login" (onClick)="login()" *ngIf="!isLoggedIn"></p-button>
