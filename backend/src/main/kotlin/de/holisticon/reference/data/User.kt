@@ -14,14 +14,17 @@ import javax.persistence.Table
 data class User(
     @Id
     var id: Long? = null,
-    val name: String) {
+    var name: String) {
   constructor() : this(null, "")
 }
 
 @Mapper(componentModel = "spring")
 interface UserConverter {
 
-  @Mappings(Mapping(source = "id", target = "userId"))
+  @Mappings(
+      Mapping(source = "id", target = "userId"),
+      Mapping(source = "name", target = "name")
+  )
   fun toDto(entity: User): UserDto
   fun toDtos(users: Iterable<User>): List<UserDto>
 
