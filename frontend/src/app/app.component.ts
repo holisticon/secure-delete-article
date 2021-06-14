@@ -2,7 +2,8 @@ import {Component, OnInit} from "@angular/core";
 import {KeycloakService} from "keycloak-angular";
 import {KeycloakProfile} from "keycloak-js";
 import {NGXLogger} from "ngx-logger";
-import {User, UserService} from "../../src-gen";
+import {ToDoItem, TodoService, User, UserService} from "../../src-gen";
+import {flatMap, tap} from "rxjs/operators";
 
 @Component({
   selector: "app-root",
@@ -14,11 +15,13 @@ export class AppComponent implements OnInit {
   public userProfile: KeycloakProfile | null = null;
 
   user: User;
+  toDoItems: ToDoItem[];
 
   constructor(
-    private readonly keycloak: KeycloakService,
-    private logger: NGXLogger,
-    private userService: UserService
+      private readonly keycloak: KeycloakService,
+      private logger: NGXLogger,
+      private userService: UserService,
+      private todoService: TodoService
   ) {}
 
   printApplications(): void {
@@ -26,9 +29,16 @@ export class AppComponent implements OnInit {
     this.userService.createUser('12345', {
       userId: '12345',
       name: 'hans.wurst',
-    }).subscribe(user => {
-      this.user = user;
-    });
+    })
+        .pipe(
+            tap(user => this.user = user),
+            flatMap(() => this.todoService.addEntry(this.user.userId, {title: 'item 1', description: 'the first item'})),
+            flatMap(() => this.todoService.addEntry(this.user.userId, {title: 'item 2', description: 'the second item'})),
+            flatMap(() => this.todoService.getToDoList(this.user.userId))
+        )
+        .subscribe(
+            toDoItems => this.toDoItems = toDoItems
+        );
   }
 
   public async ngOnInit() {
