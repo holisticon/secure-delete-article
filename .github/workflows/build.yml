@@ -9,7 +9,7 @@ jobs:
     strategy:
       matrix:
         os: [ macos-latest, ubuntu-latest ]
-        java: [ 11 ]
+        java: [ 8, 11, 13 ]
 
     steps:
     - uses: actions/checkout@v1
@@ -28,7 +28,7 @@ jobs:
           ${{ runner.os }}-maven-
 
     - name: Build
-      run: ./mvnw clean package -U
+      run: ./mvnw clean package -U -B
 
   Analyse:
     name: Analyse

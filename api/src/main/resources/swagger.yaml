@@ -1,56 +1,39 @@
 swagger: '2.0'
 info:
-  title: Application Management API
+  title: To-Do List API
   version: 0.0.1
-  description: This document contains the specification for the Application API.
-basePath: /application-api/v1
+  description: This document contains the specification for the To-Do List API.
+basePath: /todo-api/v1
 tags:
-  - name: application
-    description: Provides access to application management.
+  - name: todo
+    description: Provides access to todo lists.
+  - name: user
+    description: Procides access to user management.
 schemes:
   - http
 paths:
-  '/applications/{stage}':
+  '/user/{userId}':
     get:
       tags:
-        - application
-      summary: Returns all or filtered applications.
+        - user
+      summary: Return a user.
       description: ''
-      operationId: getApplications
+      operationId: getUser
       produces:
         - application/json
       parameters:
-        - name: stage
+        - name: userId
           in: path
-          description: Stage of the application
+          description: technical ID of the user
           required: true
           type: string
-        - name: id
-          in: query
-          description: Filter the result collection by providing one or more application ids.
-          type: array
-          items:
-            type: string
-          collectionFormat: multi
-          required: false
-        - name: offset
-          in: query
-          description: Paginate the result collection with the given offset.
-          type: integer
-          required: false
-        - name: limit
-          in: query
-          description: Limits the result collection.
-          type: integer
-          required: false
       responses:
         '200':
           description: Successful operation.
           schema:
-            title: Application list
-            type: array
-            items:
-              $ref: '#/definitions/Application'
+            title: User
+            type: object
+            $ref: '#/definitions/User'
         '400':
           description: Bad Request - Invalid parameter value.
         '401':
@@ -59,82 +42,125 @@ paths:
           description: Not Found - No result has been found matching the request criteria.
     post:
       tags:
-        - "application"
-      summary: Registers a new application.
+        - "user"
+      summary: Create a new user.
       description: ''
-      operationId: createApplication
+      operationId: createUser
       produces:
         - application/json
       consumes:
         - application/json
       parameters:
-        - name: stage
+        - name: userId
           in: path
-          description: Stage of the application
+          description: technical ID of the user
           required: true
           type: string
-        - name: application
+        - name: user
           in: body
-          description: Application to create.
+          description: User to create.
           required: true
           schema:
-            $ref: '#/definitions/Application'
+            $ref: '#/definitions/User'
       responses:
         '201':
           description: Successful operation.
           schema:
-            title: Application id.
-            type: string
+            title: User
+            type: object
+            $ref: '#/definitions/User'
         '400':
           description: Bad Request - Invalid parameter value.
         '401':
           description: Unauthorized - No user credentials where provided.
 
+  '/todo/{userId}':
+    get:
+      tags:
+        - todo
+      summary: Return the to do list of a user.
+      description: ''
+      operationId: getToDoList
+      produces:
+        - application/json
+      parameters:
+        - name: userId
+          in: path
+          description: technical ID of the user
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful operation.
+          schema:
+            title: A users To-Do List
+            type: array
+            items:
+              $ref: '#/definitions/ToDoItem'
+        '400':
+          description: Bad Request - Invalid parameter value.
+        '401':
+          description: Unauthorized - No user credentials where provided.
+        '404':
+          description: Not Found - No result has been found matching the request criteria.
+    post:
+      tags:
+        - todo
+      summary: Create a new entry in the list
+      description: ''
+      operationId: addEntry
+      produces:
+        - application/json
+      parameters:
+        - name: userId
+          in: path
+          description: technical ID of the user
+          required: true
+          type: string
+        - name: toDoItem
+          in: body
+          required: true
+          schema:
+            type: object
+            $ref: '#/definitions/ToDoItem'
+      responses:
+        '200':
+          description: Successful operation.
+          schema:
+            title: A users To-Do List
+            type: object
+            $ref: '#/definitions/ToDoItem'
+        '400':
+          description: Bad Request - Invalid parameter value.
+        '401':
+          description: Unauthorized - No user credentials where provided.
+        '404':
+          description: Not Found - No result has been found matching the request criteria.
+
+
 definitions:
-  Application:
+  User:
     type: object
     properties:
-      applicationId:
+      userId:
         type: string
-        description: Application id, provided during creation of the application in the developer portal.
+        description: technical user id
       name:
         type: string
-        description: Application name, visible in the application launchpad.
+        description: The user name
+    xml:
+      name: User
+    example:
+      userId: '0815'
+      name: Hans Wurst
+  ToDoItem:
+    type: object
+    properties:
+      id:
+        type: string
+      title:
+        type: string
       description:
         type: string
-        description: Application description.
-      launchUrl:
-        type: string
-        description: URL used in the application launchpad to navigate to the start page of the
-          application.
-      iconUrl:
-        type: string
-        description: URL of the icon used in the application launchpad on the application tile.
-      requiredRoles:
-        type: array
-        description: List of role names which have access the application.
-        items:
-          type: string
-      thirdPartyProvider:
+      done:
         type: boolean
-        description: Indicator for a third-party application.
-      providerName:
-        type: string
-        description: URL to the third-party application provider webpage.
-      providerIconUrl:
-        type: string
-        description: URL to the third-party provider icon which is displayed on the application tile in the application launchpad.
-    xml:
-      name: Application
-    example:
-      applicationId: '0815'
-      name: My Simple Application
-      description: I'm an awesome demonstration application.
-      iconUrl: 'https://cdn.holisticon.de/mdi-arrow'
-      launchUrl: 'https://apps.holisticon.de/my-app/'
-      requiredRoles:
-        - user
-        - app-user
-      thirdPartyProvider: false
-      providerName: Holisticon
-      providerIconUrl: ''
