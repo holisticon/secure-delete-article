@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>de.holisticon.reference-arch</groupId>
-    <artifactId>reference-arch-parent</artifactId>
+    <groupId>de.holisticon.demos</groupId>
+    <artifactId>secure-delete-sample</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
 
@@ -30,7 +30,7 @@
 
   <dependencies>
     <dependency>
-      <groupId>de.holisticon.reference-arch</groupId>
+      <groupId>de.holisticon.demos</groupId>
       <artifactId>backend-rest</artifactId>
     </dependency>
     <dependency>
@@ -84,6 +84,16 @@
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.jetbrains.kotlin</groupId>
+      <artifactId>kotlin-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+      <dependency>
+        <groupId>org.jetbrains.kotlin</groupId>
+        <artifactId>kotlin-test-junit</artifactId>
+        <scope>test</scope>
+      </dependency>
 
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -95,9 +105,9 @@
       <version>${keycloak.version}</version>
     </dependency>
     <dependency>
-        <groupId>org.keycloak</groupId>
-        <artifactId>keycloak-authz-client</artifactId>
-        <version>${keycloak.version}</version>
+      <groupId>org.keycloak</groupId>
+      <artifactId>keycloak-authz-client</artifactId>
+      <version>${keycloak.version}</version>
     </dependency>
 
 
