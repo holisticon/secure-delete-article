@@ -1,17 +1,9 @@
 package de.holisticon.reference.crypto
 
-import org.springframework.stereotype.Service
 
-@Service
-class CryptoService {
+interface CryptoService {
 
-  fun encrypt(userId: String, data: String): String {
-    // @TODO: Implement actual encryption
-    return data
-  }
+  fun encrypt(userId: String, data: String): String
 
-  fun decrypt(userId: String, cipherText: String): String {
-    // @TODO: Implement actual decryption
-    return cipherText
-  }
+  fun decrypt(userId: String, cipherText: String): String
 }
