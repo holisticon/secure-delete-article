@@ -10,11 +10,6 @@ keycloak:
   credentials:
     secret: 'a86c53e8-4a23-41fa-bd29-9cbf724321f1'
 
-logging.level:
-  root: ERROR
-  org.hibernate: ERROR
-  org.springframework.web: INFO
-  org.springframework.security.ws: ERROR
 
 management:
   endpoint:
@@ -22,3 +17,12 @@ management:
       enabled: true
   endpoints:
     enabled-by-default: false
+
+# Enabling H2 Console
+spring.h2.console:
+  enabled: true
+  path: /h2
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
