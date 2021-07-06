@@ -112,6 +112,8 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
             .sessionAuthenticationStrategy(sessionAuthenticationStrategy())
             .and()
             .authorizeRequests()
+            .antMatchers("/h2/**")
+            .permitAll()
             .antMatchers("/**")
             .authenticated()
             .anyRequest()
