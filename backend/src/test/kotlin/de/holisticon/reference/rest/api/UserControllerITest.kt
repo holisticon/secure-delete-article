@@ -2,7 +2,7 @@ package de.holisticon.reference.rest.api
 
 import de.holisticon.reference.data.User
 import de.holisticon.reference.data.UserConverter
-import de.holisticon.reference.data.UserRepository
+import de.holisticon.reference.data.UserService
 import de.holisticon.reference.rest.model.UserDto
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
@@ -31,14 +31,14 @@ open class UserControllerITest {
   private lateinit var converter: UserConverter
 
   @MockBean
-  private lateinit var repository: UserRepository
+  private lateinit var userService: UserService
 
   @Test
   fun `controller respond to request`() {
     // given
     val user = User(id = 1, name = "hans.wurst", toDoItems = emptyList())
     val userDto = converter.toDto(user)
-    `when`(repository.findById(1)).thenReturn(of(user))
+    `when`(userService.find(user.id!!)).thenReturn(of(user))
 
     // when
     val response = restTemplate.exchange("/user/1", HttpMethod.GET, null, object : ParameterizedTypeReference<UserDto>() {})
