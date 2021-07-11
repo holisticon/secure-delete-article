@@ -3,6 +3,7 @@ package de.holisticon.reference.data
 import de.holisticon.reference.crypto.CryptoService
 import org.springframework.stereotype.Service
 
+// tag::decrypt-data[]
 @Service
 class ToDoService(
     private val toDoItemRepository: ToDoItemRepository,
@@ -13,6 +14,13 @@ class ToDoService(
     val encryptedItems = toDoItemRepository.findAllByUserId(userId)
     return encryptedItems.map {item -> this.decrypt(item)}
   }
+
+  private fun decrypt(toDo: ToDoItem): ToDoItem {
+    val decryptedTitle = cryptoService.decrypt(toDo.user.id.toString(), toDo.title)
+    val decryptedDescription = cryptoService.decrypt(toDo.user.id.toString(), toDo.description)
+    return ToDoItem(toDo.id, toDo.user, decryptedTitle, decryptedDescription, toDo.done)
+  }
+  // end::decrypt-data[]
 
   fun createEntry(item: ToDoItem): ToDoItem {
     val encryptedItem = encrypt(item)
@@ -26,9 +34,4 @@ class ToDoService(
     return ToDoItem(toDo.id, toDo.user, encryptedTitle, encryptedDescription, toDo.done)
   }
 
-  private fun decrypt(toDo: ToDoItem): ToDoItem {
-    val decryptedTitle = cryptoService.decrypt(toDo.user.id.toString(), toDo.title)
-    val decryptedDescription = cryptoService.decrypt(toDo.user.id.toString(), toDo.description)
-    return ToDoItem(toDo.id, toDo.user, decryptedTitle, decryptedDescription, toDo.done)
-  }
 }
