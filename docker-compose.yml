@@ -11,7 +11,7 @@ services:
       - MYSQL_DATABASE
       - MYSQL_ROOT_HOST
     ports:
-      - '${DB_PORT}'
+      - '${DB_PORT}:3306'
     volumes:
       - .etc/docker/dump.sql:/docker-entrypoint-initdb.d/dump.sql
     healthcheck:
@@ -29,6 +29,11 @@ services:
       - '9090:8080'
     links:
       - mysql
+    volumes:
+# end::keycloak-docker-setup[]
+      - .etc/docker/dump.sql:/docker-entrypoint-initdb.d/dump.sql
+# tag::keycloak-docker-setup[]
+      - .etc/docker/gdpr-module-for-keycloak.ear:/opt/jboss/keycloak/standalone/deployments/gdpr-module-for-keycloak.ear
 # end::keycloak-docker-setup[]
     environment:
       DB_VENDOR: MYSQL

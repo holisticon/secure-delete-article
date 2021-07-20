@@ -1,15 +1,19 @@
+logging.level:
+  root: DEBUG
+  org.hibernate: ERROR
+  org.springframework.web: INFO
+  org.springframework.security.ws: ERROR
 
 keycloak:
   auth-server-url: http://localhost:9090/auth
   bearer-only: true
-  cors: false
+  cors: true
   principal-attribute: preferred_username
   use-resource-role-mappings: true
   realm: app
   resource: backend
   credentials:
     secret: 'a86c53e8-4a23-41fa-bd29-9cbf724321f1'
-
 
 management:
   endpoint:
@@ -25,4 +29,23 @@ spring.h2.console:
 
 spring:
   datasource:
-    url: jdbc:h2:mem:testdb
+    url: jdbc:mysql://localhost:3306/app
+    username: root
+    password: admin
+    test-on-borrow: false
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 3600000
+    validationQuery: SELECT 1
+    hikari:
+      minimumIdle: 2
+      maximumPoolSize: 10
+      idleTimeout: 120000
+      connectionTimeout: 300000
+      leakDetectionThreshold: 300000
+
+  jpa:
+    hibernate:
+      dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+      ddl-auto: update
+
+
