@@ -42,9 +42,19 @@ docker-compose up -d
 
 **Backend**
 ```
-(cd assembly/ && ../mvnw spring-boot:run)
+(cd assembly/ && ../mvnw spring-boot:run  -Dsprprofiles.active=development)
 ```
 **Frontend**
 ```
 (cd frontend/ && npm start)
+```
+
+## Testing
+
+### Performance Tests
+
+For performance we're using (Gatling)[https://gatling.io/docs/current/quickstart/]:
+
+```
+(cd assembly/ && ../mvnw gatling:test)
 ```

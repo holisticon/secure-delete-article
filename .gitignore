@@ -18,6 +18,7 @@
 .settings/
 *.sublime-workspace
 *.iml
+.factorypath
 
 # IDE - VSCode
 .vscode/*
