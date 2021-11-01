@@ -36,7 +36,7 @@ open class UserControllerITest {
   @Test
   fun `controller respond to request`() {
     // given
-    val user = User(id = 1, name = "hans.wurst", toDoItems = emptyList())
+    val user = User(id = "1", name = "hans.wurst", toDoItems = emptyList())
     val userDto = converter.toDto(user)
     `when`(userService.find(user.id!!)).thenReturn(of(user))
 

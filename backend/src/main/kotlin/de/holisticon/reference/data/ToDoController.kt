@@ -25,7 +25,7 @@ class ToDoController(
   }
 
   override fun addEntry(@PathVariable userId: String, @RequestBody toDoItem: ToDoItemDto): ResponseEntity<ToDoItemDto> {
-    val user = User(userId.toLong(), "", emptyList())
+    val user = User(userId, "", emptyList())
     val entity = toDoItemConverter.toEntity(user, toDoItem)
     val saved = toDoService.createEntry(entity)
     val response = toDoItemConverter.toDto(saved)

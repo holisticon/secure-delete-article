@@ -16,7 +16,7 @@ class UserService(
     return decrypt(savedUser)
   }
 
-  fun find(userId: Long): Optional<User> {
+  fun find(userId: String): Optional<User> {
     val encryptedUser = userRepository.findById(userId)
     return encryptedUser.map(this::decrypt)
   }

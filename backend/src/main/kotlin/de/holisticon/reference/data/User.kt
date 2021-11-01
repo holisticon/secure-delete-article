@@ -11,11 +11,11 @@ import javax.persistence.*
 @Table(name = "user")
 data class User(
     @Id
-    var id: Long? = null,
+    var id: String? = null,
     var name: String,
     @OneToMany(fetch = FetchType.LAZY)
     var toDoItems: List<ToDoItem>) {
-  constructor() : this(null, "", emptyList())
+  constructor() : this(null,"", emptyList())
 }
 
 @Mapper(componentModel = "spring")

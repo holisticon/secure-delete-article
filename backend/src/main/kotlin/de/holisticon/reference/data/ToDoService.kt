@@ -16,8 +16,8 @@ class ToDoService(
   }
 
   private fun decrypt(toDo: ToDoItem): ToDoItem {
-    val decryptedTitle = cryptoService.decrypt(toDo.user.id.toString(), toDo.title)
-    val decryptedDescription = cryptoService.decrypt(toDo.user.id.toString(), toDo.description)
+    val decryptedTitle = cryptoService.decrypt(toDo.user.id!!, toDo.title)
+    val decryptedDescription = cryptoService.decrypt(toDo.user.id!!, toDo.description)
     return ToDoItem(toDo.id, toDo.user, decryptedTitle, decryptedDescription, toDo.done)
   }
   // end::decrypt-data[]
@@ -29,8 +29,8 @@ class ToDoService(
   }
 
   private fun encrypt(toDo: ToDoItem): ToDoItem {
-    val encryptedTitle = cryptoService.encrypt(toDo.user.id.toString(), toDo.title)
-    val encryptedDescription = cryptoService.encrypt(toDo.user.id.toString(), toDo.description)
+    val encryptedTitle = cryptoService.encrypt(toDo.user.id!!, toDo.title)
+    val encryptedDescription = cryptoService.encrypt(toDo.user.id!!, toDo.description)
     return ToDoItem(toDo.id, toDo.user, encryptedTitle, encryptedDescription, toDo.done)
   }
 

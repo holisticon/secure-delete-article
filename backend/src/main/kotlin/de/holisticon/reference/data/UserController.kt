@@ -27,7 +27,7 @@ class UserController(
   }
 
   override fun getUser(@PathVariable userId: String): ResponseEntity<UserDto> {
-    val entity = userService.find(userId.toLong())
+    val entity = userService.find(userId)
     if (!entity.isPresent) {
       return ResponseEntity.notFound().build()
     }
