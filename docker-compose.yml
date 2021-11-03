@@ -27,6 +27,7 @@ services:
       - mysql
     ports:
       - '9090:8080'
+      - '9097:8787' 
     links:
       - mysql
     volumes:
@@ -45,3 +46,5 @@ services:
       KEYCLOAK_USER: 'admin'
       KEYCLOAK_LOGLEVEL: 'INFO'
       ROOT_LOGLEVEL: 'INFO'
+      DEBUG: 'true'
+      DEBUG_PORT: "*:8787"
