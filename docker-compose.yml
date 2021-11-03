@@ -22,19 +22,15 @@ services:
 # tag::keycloak-docker-setup[]
   keycloak:
     container_name: keycloak
-    image: jboss/keycloak:13.0.1
+    build:
+      context: ./keycloak
     depends_on:
       - mysql
     ports:
       - '9090:8080'
-      - '9097:8787' 
+      - '9097:8787'
     links:
       - mysql
-    volumes:
-# end::keycloak-docker-setup[]
-      - .etc/docker/dump.sql:/docker-entrypoint-initdb.d/dump.sql
-# tag::keycloak-docker-setup[]
-      - .etc/docker/gdpr-module-for-keycloak.ear:/opt/jboss/keycloak/standalone/deployments/gdpr-module-for-keycloak.ear
 # end::keycloak-docker-setup[]
     environment:
       DB_VENDOR: MYSQL
