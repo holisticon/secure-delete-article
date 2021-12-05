@@ -1,9 +1,9 @@
-import {Component, OnInit} from "@angular/core";
-import {KeycloakService} from "keycloak-angular";
-import {KeycloakProfile} from "keycloak-js";
-import {NGXLogger} from "ngx-logger";
-import {ToDoItem, TodoService, User, UserService} from "../../src-gen";
-import {flatMap, tap} from "rxjs/operators";
+import { Component, OnInit } from "@angular/core";
+import { KeycloakService } from "keycloak-angular";
+import { KeycloakProfile } from "keycloak-js";
+import { NGXLogger } from "ngx-logger";
+import { flatMap, tap } from "rxjs/operators";
+import { ToDoItem, TodoService, User, UserService } from "../../src-gen";
 
 @Component({
   selector: "app-root",
@@ -26,8 +26,8 @@ export class AppComponent implements OnInit {
 
   printApplications(): void {
 
-    this.userService.createUser('12345', {
-      userId: '12345',
+    this.userService.createUser('43642bb2-fbaf-463b-ba9e-6b72852b3d8f', {
+      userId: '43642bb2-fbaf-463b-ba9e-6b72852b3d8f',
       name: 'hans.wurst',
     })
         .pipe(

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 class ToDoController(
-    private val toDoItemRepository: ToDoItemRepository,
+    private val toDoService: ToDoService,
     private val toDoItemConverter: ToDoItemConverter
 ): TodoApi {
 
@@ -19,15 +19,15 @@ class ToDoController(
   }
 
   override fun getToDoList(@PathVariable userId: String): ResponseEntity<List<ToDoItemDto>> {
-    val items = toDoItemRepository.findAllByUserId(userId.toLong())
+    val items = toDoService.getToDoList(userId)
     val dtos = toDoItemConverter.toDtos(items)
     return ResponseEntity.ok(dtos)
   }
 
   override fun addEntry(@PathVariable userId: String, @RequestBody toDoItem: ToDoItemDto): ResponseEntity<ToDoItemDto> {
-    val user = User(userId.toLong(), "", emptyList())
+    val user = User(userId, "", emptyList())
     val entity = toDoItemConverter.toEntity(user, toDoItem)
-    val saved = toDoItemRepository.save(entity)
+    val saved = toDoService.createEntry(entity)
     val response = toDoItemConverter.toDto(saved)
     log.info("created todo entry for user ID: {}", userId)
     return ResponseEntity.ok(response)

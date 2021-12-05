@@ -11,7 +11,7 @@ services:
       - MYSQL_DATABASE
       - MYSQL_ROOT_HOST
     ports:
-      - '${DB_PORT}'
+      - '${DB_PORT}:3306'
     volumes:
       - .etc/docker/dump.sql:/docker-entrypoint-initdb.d/dump.sql
     healthcheck:
@@ -22,11 +22,13 @@ services:
 # tag::keycloak-docker-setup[]
   keycloak:
     container_name: keycloak
-    image: jboss/keycloak:13.0.1
+    build:
+      context: ./keycloak
     depends_on:
       - mysql
     ports:
       - '9090:8080'
+      - '9097:8787'
     links:
       - mysql
 # end::keycloak-docker-setup[]
@@ -40,3 +42,5 @@ services:
       KEYCLOAK_USER: 'admin'
       KEYCLOAK_LOGLEVEL: 'INFO'
       ROOT_LOGLEVEL: 'INFO'
+      DEBUG: 'true'
+      DEBUG_PORT: "*:8787"
