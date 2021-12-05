@@ -1,5 +1,4 @@
 logging.level:
-  root: DEBUG
   org.hibernate: ERROR
   org.springframework.web: INFO
   org.springframework.security.ws: ERROR
