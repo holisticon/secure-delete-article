@@ -19,7 +19,7 @@ class ToDoController(
   }
 
   override fun getToDoList(@PathVariable userId: String): ResponseEntity<List<ToDoItemDto>> {
-    val items = toDoService.getToDoList(userId.toLong())
+    val items = toDoService.getToDoList(userId)
     val dtos = toDoItemConverter.toDtos(items)
     return ResponseEntity.ok(dtos)
   }

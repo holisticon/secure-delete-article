@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface ToDoItemRepository extends PagingAndSortingRepository<ToDoItem, Long> {
 
-    List<ToDoItem> findAllByUserId(Long userId);
+    List<ToDoItem> findAllByUserId(String userId);
 }

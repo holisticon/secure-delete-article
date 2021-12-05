@@ -10,7 +10,7 @@ class ToDoService(
     private val cryptoService: CryptoService
 ) {
 
-  fun getToDoList(userId: Long): List<ToDoItem> {
+  fun getToDoList(userId: String): List<ToDoItem> {
     val encryptedItems = toDoItemRepository.findAllByUserId(userId)
     return encryptedItems.map {item -> this.decrypt(item)}
   }
