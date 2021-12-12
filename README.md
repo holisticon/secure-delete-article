@@ -7,9 +7,11 @@
     - [Keycloak Users](#keycloak-users)
   - [Development](#development)
 
-# Reference Architecture
+# Secure Do To List
 
-> Reference stack demonstrating the build and application composition with Keycloak, SpringBoot, Kotlin, Swagger, Angular and TypeScript.
+A to do list that stores its data encrypted and GDPR-compliant using crypto shredding.
+It was developed as a proof-of-concept and example for crypto shredding. 
+It uses the [Keycloak GDPR module](https://github.com/toolisticon/keycloak-gdpr-module).
 
 ## Setup
 
@@ -18,53 +20,52 @@ Prerequisites:
 * Docker
 * NodeJS 12+
 
-Start the docker stack:
-
-```
+Start the application:
+```bash
+# Start MySQL database and Keycloak containers
 docker-compose up -d
+
+# build the application
+./mvnw clean install
+
+# start the backend
+./mvnw spring-boot:run -f assembly
+
+# start the frontend (in another terminal)
+cd frontend
+npm start
 ```
 
 ## Demo Data
 
-### Keycloak Users
+To test the application, there are some preconfigured users in Keycloak:
 
-* Master Realm
+* Master Realm (login to the Keycloak admin-console)
   * admin / admin
-* App Realm
+* App Realm (login to the demo app)
   * user1 / user1
   * user2 / user2
 
-## Development
-
-```
-./mvn clean install
-```
-
-**Backend**
-```
-(cd assembly/ && ../mvnw spring-boot:run  -Dsprprofiles.active=development)
-```
-**Frontend**
-```
-(cd frontend/ && npm start)
-```
 
 ## Testing
 
 ### Performance Tests
 
-For performance we're using (Gatling)[https://gatling.io/docs/current/quickstart/]:
+For performance we're using [Gatling](https://gatling.io/docs/current/quickstart/):
 
-```
-(cd assembly/ && ../mvnw gatling:test)
+```bash
+$ ./mvnw gatling:test -f assembly
 ```
 ### Debugging
 
-To debug the deployed module in Keycloak:
+To debug the deployed gdpr-module in Keycloak:
+
 ```bash
 $ docker compose up
 ```
+
 then connect via Remote Debugging:
+
 ```
 -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:9097
 ```
